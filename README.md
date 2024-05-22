@@ -6,4 +6,4 @@
 - ### From : [https://github.com/adi1090x/rofi](https://github.com/adi1090x/rofi)
 
 ## Dependencies
-- ### Starship: [https://github.com/starship/starship]
+- ### Starship: [https://github.com/starship/starship](https://github.com/starship/starship)
