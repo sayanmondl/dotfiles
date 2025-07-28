@@ -16,5 +16,7 @@ sudo dnf install lxappearance gnome-tweaks # Use this to set fonts and themes
 ```
 
 Fonts: "JetBrainsMono Nerd Font"
+
 GTK-Theme: "Gruvbox-Dark-Medium"
+
 Icon theme: "Tela-manjaro"
