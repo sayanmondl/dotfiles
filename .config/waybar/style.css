@@ -1,154 +1,240 @@
+@define-color background  #282828;
+@define-color foreground  #ebdbb2;
+@define-color foreground1  #928374;
+@define-color orange  #fe8019;
+
 * {
   border: none;
   border-radius: 0;
   min-height: 0;
-  font-family: JetBrainsMono Nerd Font;
-  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+  text-shadow: none;
 }
 
-window#waybar {
-  background-color: #181825;
-  transition-property: background-color;
-  transition-duration: 0.5s;
-}
-
-window#waybar.hidden {
-  opacity: 0.5;
-}
-
-#workspaces {
-  background-color: transparent;
-}
-
-#workspaces button {
-  all: initial;
-  /* Remove GTK theme values (waybar #1351) */
-  min-width: 0;
-  /* Fix weird spacing in materia (waybar #450) */
-  box-shadow: inset 0 -3px transparent;
-  /* Use box-shadow instead of border so the text isn't offset */
-  padding: 6px 18px;
-  margin: 6px 3px;
-  border-radius: 4px;
-  background-color: #313244;
-  color: #cdd6f4;
-}
-
-#workspaces button.focused {
-  color: #313244;
-  background-color: #cdd6f4;
-}
-
-#workspaces button:hover {
-  box-shadow: inherit;
-  text-shadow: inherit;
-  color: #313244;
-  background-color: #cdd6f4;
-}
-
-#workspaces button.urgent {
-  background-color: #f38ba8;
-}
-
-#memory,
-#custom-power,
-#battery,
-#backlight,
-#pulseaudio,
-#network,
-#clock,
-#tray {
-  border-radius: 4px;
-  margin: 6px 3px;
-  padding: 6px 12px;
-  color: rgb(30, 30, 46);
-  background-color: #f5e0dc;
-}
-
-#custom-power {
-  margin-right: 6px;
-}
-
-#custom-logo {
-  padding-right: 7px;
-  padding-left: 7px;
-  margin-left: 5px;
-  font-size: 24px;
-  border-radius: 8px 0px 0px 8px;
-  color: #cba6f7;
-}
-
-#mode {
-  font-family: JetBrainsMono Nerd Font;
-  font-size: 16px;
-  box-shadow: inset 0 -3px transparent;
-  background-color: #89b4fa;
-  padding: 6px 8px;
-  margin: 6px 3px;
-  border-radius: 4px;
-  color: #181825;
-}
-
-#memory {
-  background-color: #fab387;
-}
-
-#battery {
-  background-color: #f38ba8;
-}
-
-@keyframes blink {
+/* Keyframes for main bar criticals */
+@keyframes blink-critical-text {
   to {
-    background-color: #f38ba8;
-    color: #181825;
+    color: @foreground;
   }
 }
 
-#battery.warning,
-#battery.critical,
-#battery.urgent {
-  background-color: #ff0048;
-  color: #181825;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
+/* Keyframes for main bar modifiers */
+@keyframes blink-modifier-text {
+  to {
+    color: @foreground;
+  }
+}
+
+/* Main bar defaults */ /* {{{ */
+#waybar.main {
+  background: transparent;
+  font-family: "JetBrains Mono Nerd Font";
+  font-size: 11pt;
+  font-weight: 500;
+}
+
+#waybar.main button {
+  font-family: JetBrains Mono Nerd Font;
+  font-size: 11pt;
+  font-weight: 500;
+  transition: all 0.15s ease-in-out;
+}
+
+/* Main bar modules */ /* {{{ */
+#waybar.main #battery,
+#waybar.main #network,
+#waybar.main #battery,
+#waybar.main #backlight,
+#waybar.main #clock,
+#waybar.main #cpu,
+#waybar.main #memory,
+#waybar.main #pulseaudio,
+#waybar.main #temperature,
+#waybar.main #tray,
+#waybar.main #custom-fans {
+  padding-left: 8pt;
+  padding-right: 8pt;
+  padding-bottom: 4px;
+  padding-top: 4px;
+  background: transparent;
+}
+
+#waybar.main #tray {
+  padding-right: 6pt;
+}
+
+/* Module colors */
+#waybar.main #cpu,
+#waybar.main #temperature,
+#waybar.main #memory,
+#waybar.main #disk,
+#waybar.main #network {
+  color: @foreground;
+}
+
+#waybar.main #backlight,
+#waybar.main #pulseaudio {
+  color: @foreground;
+}
+
+#waybar.main #custom-fans,
+#waybar.main #battery {
+  color: @foreground;
+}
+
+#waybar.main #clock {
+  color: @foreground;
+}
+
+#waybar.main #network {
+  padding-right: 5px;
+  padding-left: 5px;
+  color: @foreground;
+  background: transparent;
+}
+
+#waybar.main #network.wifi.normal,
+#waybar.main #network.ethernet {
+  color: @foreground;
+  padding-right: 10px;
+}
+
+#waybar.main #network.wifi {
+  color: @foreground;
+  padding-right: 10px;
+} /* }}} */
+
+/* Main bar criticals */
+#waybar.main #custom-nvidia.critical,
+#waybar.main #custom-battery.critical,
+#waybar.main #workspaces button.urgent,
+#waybar.main #workspaces button.special.urgent,
+#waybar.main #memory.swap.critical,
+#waybar.main #memory.ram.critical,
+#waybar.main #cpu.critical,
+#waybar.main #temperature.critical,
+#waybar.main #battery.critical.discharging {
+  color: @foreground;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+  animation-name: blink-critical-text;
+  animation-duration: 1s;
+  animation-timing-function: steps(15);
 }
 
-#battery.charging {
-  background-color: #a6e3a1;
+/* Main bar warnings */
+#waybar.main #pulseaudio.muted {
+  color: @foreground;
 }
 
-#backlight {
-  background-color: #fab387;
+#waybar.main #battery.warning,
+#waybar.main #battery.warning.discharging {
+  color: @foreground;
 }
 
-#pulseaudio {
-  background-color: #f9e2af;
+/* Battery chargin */
+#waybar.main #battery.charging {
+  color: @foreground;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-name: blink-modifier-text;
+  animation-duration: 1s;
+  animation-timing-function: steps(15);
 }
 
-#network {
-  background-color: #94e2d5;
-  padding-right: 17px;
+/* Workspace */
+/* Default workspace settings */
+#waybar.main #workspaces button {
+  color: @foreground;
+  background: transparent;
+  border: 1.5px solid transparent;
+  padding-left: 2pt;
+  padding-right: 2pt;
+  border-radius: 5px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: 4px;
+  margin-right: 4px;
+  transition: all 0.25s ease;
 }
 
-#clock {
-  font-family: JetBrainsMono Nerd Font;
-  background-color: #cba6f7;
+/* Focused workspace */
+#waybar.main #workspaces button.visible {
+  color: @foreground;
 }
 
-#custom-power {
-  background-color: #f2cdcd;
+/* Focused workspace & monitor */
+#waybar.main #workspaces button.active {
+  color: @background;
+  border: 1.5px solid @orange;
+  border-radius: 5px;
+  background: @foreground;
 }
 
+/* Style when cursor is on the button */
+#waybar.main #workspaces button:hover {
+  color: @background;
+  background: @foreground;
+}
+
+/* Special workplace animation */
+#waybar.main #workspaces button.special.active {
+  border: 1.5px solid transparent;
+  color: @foreground;
+  transition: all 0s ease;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-name: blink-modifier-text;
+  animation-duration: 1s;
+  animation-timing-function: steps(15);
+}
+
+/* Custom slashes as spacers */
+#waybar.main #custom-spacer {
+  font-size: 11pt;
+  font-weight: bold;
+  color: @foreground;
+  background: transparent;
+}
+
+/* Custom tray icon */
+#waybar.main #custom-notification {
+  font-size: 11pt;
+  font-weight: bold;
+  color: @foreground;
+  background: transparent;
+  padding-right: 6pt;
+  padding-left: 2pt;
+}
+
+#waybar.main #custom-spotify {
+  font-size: 11pt;
+  color: @foreground;
+  background: #427b58;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-left: 10px;
+  border-radius: 100px;
+  padding-right: 12pt;
+  padding-left: 10pt;
+}
+
+/* Tooltip */
 tooltip {
-  border-radius: 8px;
-  padding: 15px;
-  background-color: #131822;
+  background: @background;
+  border: 1.5px solid @foreground1;
+  border-radius: 5px;
+  font-weight: 500;
+  font-family: "JetBrains Mono Nerd Font";
 }
 
-tooltip label {
-  padding: 5px;
-  background-color: #131822;
+#waybar.main #tray menu {
+  background: @background;
+  border: 2px solid @foreground;
+  border-radius: 0px;
+  padding: 10px 5px;
 }
