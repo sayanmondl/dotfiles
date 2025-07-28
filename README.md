@@ -12,7 +12,7 @@ sudo dnf install kitty alacritty rofi waybar grim slurp wl-clipboard cliphist sw
 sudo dnf install pavucontrol brightnessctl playerctl blueman network-manager-applet
 ```
 ```bash
-sudo dnf install lxappearance gnome-tweaks # Use this to set fonts and themes
+sudo dnf install lxappearance gnome-tweaks # Use these to set fonts and themes
 ```
 
 Fonts: "JetBrainsMono Nerd Font"
