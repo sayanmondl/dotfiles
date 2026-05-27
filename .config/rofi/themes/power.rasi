@@ -1,0 +1,158 @@
+configuration {
+    show-icons:                 false;
+}
+
+@import                          "../colors.rasi"
+@import                          "../fonts.rasi"
+
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       570px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               8px;
+    border-color:                @mauve;
+    cursor:                      "default";
+    background-color:            rgba(24, 24, 37, 0.9);
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     15px;
+    margin:                      0px;
+    padding:                     20px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @mauve;
+    background-color:            transparent;
+    children:                    [ "inputbar", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     15px;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px;
+    border-radius:               0px;
+    border-color:                @mauve;
+    background-color:            transparent;
+    text-color:                  @text;
+    children:                    [ "textbox-prompt-colon", "prompt", "message"];
+}
+
+dummy {
+    background-color:            transparent;
+}
+
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "";
+    padding:                     8px 16px;
+    width:                       44px;
+    border-radius:               8px;
+    background-color:            @crust;
+    text-color:                  @text;
+}
+
+prompt {
+    enabled:                     true;
+    padding:                     8px 12px;
+    border-radius:               8px;
+    background-color:            @crust;
+    text-color:                  @text;
+}
+
+/*****----- Message -----*****/
+message {
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     8px;
+    border:                      0px solid;
+    border-radius:               8px;
+    border-color:                @mauve;
+    background-color:            @crust;
+    text-color:                  @text;
+    expand:                      true;
+}
+
+textbox {
+    background-color:            inherit;
+    text-color:                  inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+    placeholder-color:           @text;
+    blink:                       true;
+    markup:                      true;
+}
+
+error-message {
+    padding:                     12px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @mauve;
+    background-color:            @mantle;
+    text-color:                  @text;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     5;
+    lines:                       1;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    spacing:                     15px;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @mauve;
+    background-color:            transparent;
+    text-color:                  @text;
+    cursor:                      "default";
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      0px;
+    padding:                     10px 10px;
+    border:                      0px solid;
+    border-radius:               8px;
+    border-color:                @mauve;
+    background-color:            @surface0;
+    text-color:                  @text;
+    cursor:                      pointer;
+}
+
+element-text {
+    font:                        "feather bold 16";
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+
+element selected.normal {
+    background-color:            transparent;
+    background-image:            linear-gradient(135deg, #b4befe, #cdd6f4);
+    text-color:                  @crust;
+}
