@@ -1,154 +1,294 @@
+/* ---------------------------------------------------------
+   Catppuccin Mocha Palette
+--------------------------------------------------------- */
+
+@define-color rosewater #f5e0dc;
+@define-color flamingo  #f2cdcd;
+@define-color pink      #f5c2e7;
+@define-color mauve     #cba6f7;
+@define-color red       #f38ba8;
+@define-color maroon    #eba0ac;
+@define-color peach     #fab387;
+@define-color yellow    #f9e2af;
+@define-color green     #a6e3a1;
+@define-color teal      #94e2d5;
+@define-color sky       #89dceb;
+@define-color sapphire  #74c7ec;
+@define-color blue      #89b4fa;
+@define-color lavender  #b4befe;
+
+@define-color text      #cdd6f4;
+@define-color subtext1  #bac2de;
+@define-color subtext0  #a6adc8;
+
+@define-color overlay2  #9399b2;
+@define-color overlay1  #7f849c;
+@define-color overlay0  #6c7086;
+
+@define-color surface2  #585b70;
+@define-color surface1  #45475a;
+@define-color surface0  #313244;
+
+@define-color base      #1e1e2e;
+@define-color mantle    #181825;
+@define-color crust     #11111b;
+
+/* ---------------------------------------------------------
+   Global
+--------------------------------------------------------- */
+
 * {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 14px;
+  font-weight: 700;
+  min-height: 0;
   border: none;
   border-radius: 0;
-  min-height: 0;
-  font-family: JetBrainsMono Nerd Font;
-  font-size: 16px;
 }
+
+/* ---------------------------------------------------------
+   Transparent Floating Bar
+--------------------------------------------------------- */
 
 window#waybar {
-  background-color: #181825;
-  transition-property: background-color;
-  transition-duration: 0.5s;
+  background-color: alpha(@mantle, 0.9);
+  color: @text;
 }
 
-window#waybar.hidden {
-  opacity: 0.5;
+.modules-left,
+.modules-center,
+.modules-right {
+  padding: 0 10px;
 }
+
+/* ---------------------------------------------------------
+   Generic Floating Pills
+--------------------------------------------------------- */
+
+#custom-search,
+#custom-settings,
+#workspaces,
+#mpris,
+#network,
+#bluetooth,
+#pulseaudio,
+#battery,
+#clock,
+#memory,
+#temperature {
+  color: @text;
+}
+
+/* ---------------------------------------------------------
+   Icon Pills
+--------------------------------------------------------- */
+
+#custom-search,
+#custom-settings {
+  padding: 4px 8px;
+  font-size: 14px;
+}
+
+/* ---------------------------------------------------------
+   Workspaces
+--------------------------------------------------------- */
 
 #workspaces {
-  background-color: transparent;
+  padding: 10px 0px;
+  margin-left: 8px;
+  transition: all 1s ease;
 }
 
 #workspaces button {
-  all: initial;
-  /* Remove GTK theme values (waybar #1351) */
-  min-width: 0;
-  /* Fix weird spacing in materia (waybar #450) */
-  box-shadow: inset 0 -3px transparent;
-  /* Use box-shadow instead of border so the text isn't offset */
-  padding: 6px 18px;
-  margin: 6px 3px;
-  border-radius: 4px;
-  background-color: #313244;
-  color: #cdd6f4;
-}
-
-#workspaces button.focused {
-  color: #313244;
-  background-color: #cdd6f4;
+  color: @subtext1;
+  background: transparent;
+  min-width: 30px;
+  min-height: 30px;
+  margin: 0 4px;
+  padding: 0;
+  border-radius: 8px;
 }
 
 #workspaces button:hover {
-  box-shadow: inherit;
-  text-shadow: inherit;
-  color: #313244;
-  background-color: #cdd6f4;
+  background: alpha(@surface1, 0.7);
+}
+
+#workspaces button.active:hover {
+  background: linear-gradient(135deg, @lavender, @pink);
+  color: @crust;
+}
+
+#workspaces button.active,
+#workspaces button.focused {
+  background: linear-gradient(135deg, @peach, @rosewater);
+  color: @crust;
 }
 
 #workspaces button.urgent {
-  background-color: #f38ba8;
+  background: linear-gradient(135deg, @red, @mauve);
+  color: @base;
+}
+
+/* ---------------------------------------------------------
+   MPRIS
+--------------------------------------------------------- */
+
+#media-control {
+  background: linear-gradient(135deg, @peach, @mauve);
+  padding: 0 18px;
+  margin: 8px 0;
+  border-radius: 8px;
+}
+
+#custom-media-prev,
+#custom-media-play,
+#custom-media-next {
+  color: @base;
+  padding: 0 6px;
+  margin: 0 4px;
+  border-radius: 999px;
+  font-size: 16px;
+}
+
+#custom-media {
+  color: @base;
+  padding: 0 8px;
+  min-width: 160px;
+}
+
+/* ---------------------------------------------------------
+   Clock
+--------------------------------------------------------- */
+
+#clock {
+  color: @peach;
+  font-size: 16px;
+}
+
+#custom-weather {
+  margin-left: 16px;
+  font-size: 16px;
+  color: @yellow;
+}
+
+/* ---------------------------------------------------------
+   Network
+--------------------------------------------------------- */
+
+#network {
+  color: @crust;
+  background: linear-gradient(135deg, @peach, @rosewater);
+  border-radius: 8px;
+  padding: 0 12px;
+  margin: 8px 0;
+}
+
+#network.disconnected {
+  background: linear-gradient(135deg, @text, @lavender);
+}
+
+/* ---------------------------------------------------------
+   Bluetooth
+--------------------------------------------------------- */
+
+#bluetooth {
+  color: @crust;
+  background: linear-gradient(135deg, @peach, @rosewater);
+  border-radius: 8px;
+  padding: 0 12px;
+  margin: 8px 0;
+}
+
+#bluetooth.disabled,
+#bluetooth.off {
+  background: linear-gradient(135deg, @text, @lavender);
+}
+
+/* ---------------------------------------------------------
+   Audio
+--------------------------------------------------------- */
+
+#pulseaudio {
+  color: @crust;
+  background: linear-gradient(135deg, @lavender, @pink);
+  border-radius: 8px;
+  padding: 0 12px;
+  margin: 8px 0;
+}
+
+#pulseaudio.muted {
+  background: linear-gradient(135deg, @text, @lavender);
+}
+
+/* ---------------------------------------------------------
+   Battery
+--------------------------------------------------------- */
+
+#battery {
+  color: @crust;
+  background: linear-gradient(135deg, @lavender, @pink);
+  border-radius: 8px;
+  padding: 0 12px;
+  margin: 8px 0;
+}
+
+#battery.charging,
+#battery.plugged {
+  background: linear-gradient(135deg, @blue, @green);
+}
+
+#battery.warning:not(.charging) {
+  background: linear-gradient(135deg, @flamingo, @maroon);
+}
+
+#battery.critical:not(.charging) {
+  background: linear-gradient(135deg, @maroon, @red);
+}
+
+/* ---------------------------------------------------------
+   Control Center
+--------------------------------------------------------- */
+
+#right-hidden-top {
+  background: linear-gradient(135deg, @lavender, @pink);
+  border-radius: 8px;
+  padding: 0 8px;
+  margin: 8px 0;
 }
 
 #memory,
-#custom-power,
-#battery,
-#backlight,
-#pulseaudio,
-#network,
-#clock,
-#tray {
-  border-radius: 4px;
-  margin: 6px 3px;
-  padding: 6px 12px;
-  color: rgb(30, 30, 46);
-  background-color: #f5e0dc;
+#temperature,
+#custom-arrow-left,
+#custom-ctlcenter {
+  color: @crust;
 }
 
-#custom-power {
-  margin-right: 6px;
+#custom-arrow-left {
+  padding: 0 8px;
 }
 
-#custom-logo {
-  padding-right: 7px;
-  padding-left: 7px;
-  margin-left: 5px;
-  font-size: 24px;
-  border-radius: 8px 0px 0px 8px;
-  color: #cba6f7;
-}
-
-#mode {
-  font-family: JetBrainsMono Nerd Font;
-  font-size: 16px;
-  box-shadow: inset 0 -3px transparent;
-  background-color: #89b4fa;
-  padding: 6px 8px;
-  margin: 6px 3px;
-  border-radius: 4px;
-  color: #181825;
+#custom-ctlcenter {
+  min-width: 40px;
 }
 
 #memory {
-  background-color: #fab387;
+  margin-left: 8;
 }
 
-#battery {
-  background-color: #f38ba8;
+#temperature {
+  margin-left: 12px;
 }
 
-@keyframes blink {
-  to {
-    background-color: #f38ba8;
-    color: #181825;
-  }
-}
-
-#battery.warning,
-#battery.critical,
-#battery.urgent {
-  background-color: #ff0048;
-  color: #181825;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-#battery.charging {
-  background-color: #a6e3a1;
-}
-
-#backlight {
-  background-color: #fab387;
-}
-
-#pulseaudio {
-  background-color: #f9e2af;
-}
-
-#network {
-  background-color: #94e2d5;
-  padding-right: 17px;
-}
-
-#clock {
-  font-family: JetBrainsMono Nerd Font;
-  background-color: #cba6f7;
-}
-
-#custom-power {
-  background-color: #f2cdcd;
-}
+/* ---------------------------------------------------------
+   Tooltip
+--------------------------------------------------------- */
 
 tooltip {
+  background: @mantle;
   border-radius: 8px;
-  padding: 15px;
-  background-color: #131822;
 }
 
 tooltip label {
-  padding: 5px;
-  background-color: #131822;
+  color: @text;
+  padding: 4px;
 }
